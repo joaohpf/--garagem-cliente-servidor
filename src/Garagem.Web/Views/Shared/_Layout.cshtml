@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] · Garagem</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="topo">
+        <div class="conteudo topo__linha">
+            <a class="marca" asp-controller="Reservas" asp-action="Index">Garagem de Veículos</a>
+            <nav class="menu">
+                <a asp-controller="Reservas" asp-action="Index">Reservas</a>
+                <a asp-controller="Veiculos" asp-action="Index">Veículos</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <partial name="_Mensagens" />
+        @RenderBody()
+    </main>
+
+    <footer class="rodape conteudo">
+        Cliente web (Garagem.Web) · consome a API em <code>Garagem.Api</code> via HTTP
+    </footer>
+</body>
+</html>

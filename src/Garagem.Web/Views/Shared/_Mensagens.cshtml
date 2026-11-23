@@ -1,0 +1,12 @@
+@if (ViewData["ErroApi"] is string erroApi)
+{
+    <div class="aviso aviso--erro">@erroApi</div>
+}
+@if (TempData["Sucesso"] is string sucesso)
+{
+    <div class="aviso aviso--ok">@sucesso</div>
+}
+@if (TempData["Erro"] is string erro)
+{
+    <div class="aviso aviso--erro">@erro</div>
+}

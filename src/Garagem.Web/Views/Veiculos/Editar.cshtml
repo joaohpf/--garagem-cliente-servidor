@@ -1,0 +1,17 @@
+@model VeiculoForm
+@{
+    ViewData["Title"] = "Editar veículo";
+}
+
+<h1>Editar veículo</h1>
+
+<section class="cartao">
+    <form asp-action="Editar" asp-route-id="@ViewBag.Id" method="post" class="formulario">
+        <div asp-validation-summary="ModelOnly" class="aviso aviso--erro"></div>
+        <partial name="_CamposVeiculo" model="Model" />
+        <div class="linha-botoes">
+            <button type="submit" class="botao">Salvar</button>
+            <a asp-action="Index" class="botao botao--secundario">Voltar</a>
+        </div>
+    </form>
+</section>

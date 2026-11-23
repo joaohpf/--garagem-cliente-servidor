@@ -1,0 +1,56 @@
+@model VeiculosPagina
+@{
+    ViewData["Title"] = "Veículos";
+}
+
+<h1>Veículos</h1>
+
+<section class="cartao">
+    <h2>Cadastrar veículo</h2>
+    <form asp-action="Cadastrar" method="post" class="formulario">
+        <div asp-validation-summary="ModelOnly" class="aviso aviso--erro"></div>
+        <partial name="_CamposVeiculo" for="Form" />
+        <button type="submit" class="botao">Cadastrar</button>
+    </form>
+</section>
+
+<section class="cartao">
+    <h2>Frota</h2>
+    @if (!Model.Veiculos.Any())
+    {
+        <p class="vazio">Nenhum veículo cadastrado.</p>
+    }
+    else
+    {
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Ano</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model.Veiculos)
+                {
+                    <tr>
+                        <td><strong>@v.Placa</strong></td>
+                        <td>@v.Modelo</td>
+                        <td>@v.Ano</td>
+                        <td><span class="selo selo--@v.Status.ToLowerInvariant()">@StatusTexto.Veiculo(v.Status)</span></td>
+                        <td>
+                            <div class="acoes">
+                                <a class="botao botao--secundario" asp-action="Editar" asp-route-id="@v.Id">Editar</a>
+                                <form asp-action="Remover" asp-route-id="@v.Id" method="post">
+                                    <button type="submit" class="botao botao--perigo">Remover</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</section>

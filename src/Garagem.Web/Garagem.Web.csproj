@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- Permite executar com o runtime .NET 9 ou 10 caso o .NET 8 não esteja instalado. -->
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+
+  <!--
+    Projeto CLIENTE: propositalmente sem referência aos projetos do servidor.
+    A única ligação com a API é o contrato HTTP/JSON.
+  -->
+
+</Project>

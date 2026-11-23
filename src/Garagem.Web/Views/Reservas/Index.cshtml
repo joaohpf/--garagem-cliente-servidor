@@ -1,0 +1,88 @@
+@model ReservasPagina
+@{
+    ViewData["Title"] = "Reservas";
+    var disponiveis = Model.Veiculos.Where(v => v.Status == "Disponivel").ToList();
+}
+
+<h1>Reservas</h1>
+
+<section class="cartao">
+    <h2>Nova reserva</h2>
+    <form asp-action="Criar" method="post" class="formulario">
+        <div asp-validation-summary="ModelOnly" class="aviso aviso--erro"></div>
+
+        <label>
+            Veículo
+            <select asp-for="Form.VeiculoId">
+                <option value="">Selecione…</option>
+                @foreach (var v in disponiveis)
+                {
+                    <option value="@v.Id">@v.Placa · @v.Modelo (@v.Ano)</option>
+                }
+            </select>
+            <span asp-validation-for="Form.VeiculoId" class="erro-campo"></span>
+        </label>
+
+        <label>
+            Cliente
+            <input asp-for="Form.Cliente" placeholder="Nome do cliente" />
+            <span asp-validation-for="Form.Cliente" class="erro-campo"></span>
+        </label>
+
+        <label>
+            Início
+            <input asp-for="Form.Inicio" />
+        </label>
+
+        <label>
+            Fim
+            <input asp-for="Form.Fim" />
+        </label>
+
+        <button type="submit" class="botao">Reservar</button>
+    </form>
+    <p class="dica">Só aparecem veículos com status “Disponível”. Conflitos de datas são verificados pelo servidor.</p>
+</section>
+
+<section class="cartao">
+    <h2>Reservas cadastradas</h2>
+    @if (!Model.Reservas.Any())
+    {
+        <p class="vazio">Nenhuma reserva cadastrada.</p>
+    }
+    else
+    {
+        <table class="tabela">
+            <thead>
+                <tr>
+                    <th>Veículo</th>
+                    <th>Cliente</th>
+                    <th>Período</th>
+                    <th>Situação</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model.Reservas)
+                {
+                    <tr class="@(r.Status == "Cancelada" ? "linha--apagada" : "")">
+                        <td><strong>@r.PlacaVeiculo</strong> · @r.ModeloVeiculo</td>
+                        <td>@r.Cliente</td>
+                        <td>@r.Inicio.ToString("dd/MM/yyyy") a @r.Fim.ToString("dd/MM/yyyy")</td>
+                        <td><span class="selo selo--@r.Status.ToLowerInvariant()">@r.Status</span></td>
+                        <td>
+                            <div class="acoes">
+                                @if (r.Status == "Ativa")
+                                {
+                                    <form asp-action="Cancelar" asp-route-id="@r.Id" method="post">
+                                        <button type="submit" class="botao botao--secundario">Cancelar</button>
+                                    </form>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</section>

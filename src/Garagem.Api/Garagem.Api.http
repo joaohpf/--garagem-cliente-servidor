@@ -1,0 +1,35 @@
+# Requisições de exemplo (VS Code com a extensão REST Client, ou Visual Studio / Rider).
+@api = http://localhost:5080
+
+### Verificar se o servidor está no ar
+GET {{api}}/api/status
+
+### Listar veículos
+GET {{api}}/api/veiculos
+
+### Cadastrar veículo
+POST {{api}}/api/veiculos
+Content-Type: application/json
+
+{
+  "placa": "RVD2A26",
+  "modelo": "Chevrolet Onix",
+  "ano": 2024
+}
+
+### Listar reservas
+GET {{api}}/api/reservas
+
+### Criar reserva (troque o veiculoId por um id retornado na listagem)
+POST {{api}}/api/reservas
+Content-Type: application/json
+
+{
+  "veiculoId": "00000000-0000-0000-0000-000000000000",
+  "cliente": "Maria Souza",
+  "inicio": "2026-12-01",
+  "fim": "2026-12-05"
+}
+
+### Cancelar reserva
+PATCH {{api}}/api/reservas/00000000-0000-0000-0000-000000000000/cancelar

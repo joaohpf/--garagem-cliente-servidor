@@ -1,0 +1,29 @@
+@model VeiculoForm
+@* Campos compartilhados entre cadastro e edição. *@
+
+<label>
+    Placa
+    <input asp-for="Placa" placeholder="ABC1D23" />
+    <span asp-validation-for="Placa" class="erro-campo"></span>
+</label>
+
+<label>
+    Modelo
+    <input asp-for="Modelo" placeholder="Ex.: Fiat Argo" />
+    <span asp-validation-for="Modelo" class="erro-campo"></span>
+</label>
+
+<label>
+    Ano
+    <input asp-for="Ano" />
+    <span asp-validation-for="Ano" class="erro-campo"></span>
+</label>
+
+<label>
+    Status
+    <select asp-for="Status">
+        <option value="Disponivel">Disponível</option>
+        <option value="EmManutencao">Em manutenção</option>
+        <option value="Inativo">Inativo</option>
+    </select>
+</label>

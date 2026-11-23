@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+TestResults/
+
+# Dados gerados pela API em tempo de execução
+src/Garagem.Api/data/
